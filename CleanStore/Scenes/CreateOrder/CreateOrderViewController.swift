@@ -11,6 +11,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 protocol CreateOrderDisplayLogic: class
 {
@@ -19,10 +21,14 @@ protocol CreateOrderDisplayLogic: class
 
 class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic
 {
+    let disposeBag =  DisposeBag()
+    
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var doneButton: UIButton!
     
     var interactor: CreateOrderBusinessLogic?
+    var presenter: CreateOrderPresentationLogic?
     var router: (NSObject & CreateOrderRoutingLogic & CreateOrderDataPassing)?
     
     // MARK: Object lifecycle
@@ -44,10 +50,14 @@ class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic
         let interactor = CreateOrderInteractor()
         let presenter = CreateOrderPresenter()
         let router = CreateOrderRouter()
+        
         viewController.interactor = interactor
         viewController.router = router
+        viewController.presenter = presenter
+        
         interactor.presenter = presenter
-        presenter.viewController = viewController
+        presenter.interactor = interactor
+      
         router.viewController = viewController
         router.dataStore = interactor
     }
@@ -67,14 +77,15 @@ class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        configurePresenter()
+        doneButton.rx.tap
+            .subscribe { _ in
+                self.createOrder()
+            }.disposed(by: disposeBag)
     }
-    
+   
     // MARK: Do something
-    
-    @IBAction func donePressed(_ sender: Any) {
-        createOrder()
-    }
-    
+
     func createOrder() {
         let firstName =  firstNameField.text!
         let lastName = lastNameField.text!
@@ -85,9 +96,11 @@ class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic
     
     func displayOrder(viewModel: CreateOrderModel.DTO.ViewModel) {
         router?.routeToDisplayOrder(segue: nil)
-//        let alertController = UIAlertController(title: "CreateOrder", message: viewModel.formattedResult, preferredStyle: .alert)
-//        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//        alertController.addAction(alertAction)
-//        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func configurePresenter() {
+        presenter?.viewModel.drive(onNext: { viewModel in
+            self.displayOrder(viewModel: viewModel)
+        }).disposed(by: disposeBag)
     }
 }

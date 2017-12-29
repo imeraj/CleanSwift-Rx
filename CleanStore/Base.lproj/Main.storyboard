@@ -82,6 +82,21 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Bu7-at-wM8">
+                                        <rect key="frame" x="0.0" y="143.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bu7-at-wM8" id="Ues-lz-Kng">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OEe-tt-HhX">
+                                                    <rect key="frame" x="169" y="5" width="37" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Done"/>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -90,22 +105,9 @@
                             <outlet property="delegate" destination="O7I-Yz-nre" id="QF6-X4-YCt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Create Order" id="ET4-Ib-Q3A">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="b00-Xe-F37">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="boM-aH-C7U">
-                                <rect key="frame" x="313" y="7" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="donePressed:" destination="O7I-Yz-nre" eventType="touchUpInside" id="r6U-Gb-ygS"/>
-                                </connections>
-                            </button>
-                            <connections>
-                                <action selector="donePressed:" destination="O7I-Yz-nre" id="V62-AT-Soc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Create Order" id="ET4-Ib-Q3A"/>
                     <connections>
+                        <outlet property="doneButton" destination="OEe-tt-HhX" id="Pfv-Bm-1ad"/>
                         <outlet property="firstNameField" destination="Qn2-HK-E91" id="VH1-UC-Y4G"/>
                         <outlet property="lastNameField" destination="RLZ-GQ-QBx" id="Exr-Mw-Mgv"/>
                     </connections>

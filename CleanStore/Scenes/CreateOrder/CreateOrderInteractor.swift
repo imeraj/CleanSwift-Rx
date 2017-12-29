@@ -11,9 +11,11 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol CreateOrderBusinessLogic
 {
+    var createOrderResponse: PublishSubject<CreateOrderModel.DTO.Response> { get set }
     func createOrder(request: CreateOrderModel.DTO.Request)
 }
 
@@ -25,6 +27,7 @@ protocol CreateOrderDataStore
 class CreateOrderInteractor: CreateOrderBusinessLogic, CreateOrderDataStore
 {
     var name: String = ""
+    var createOrderResponse = PublishSubject<CreateOrderModel.DTO.Response>()
     
     var presenter: CreateOrderPresentationLogic!
     var worker: CreateOrderWorker!
@@ -35,8 +38,6 @@ class CreateOrderInteractor: CreateOrderBusinessLogic, CreateOrderDataStore
         worker = CreateOrderWorker(request: request)
         let order = worker.createOrder()
         name = order
-        
-        let response = CreateOrderModel.DTO.Response(result: order)
-        presenter.presentOrder(response: response)
+        createOrderResponse.onNext(CreateOrderModel.DTO.Response(result: order))
     }
 }

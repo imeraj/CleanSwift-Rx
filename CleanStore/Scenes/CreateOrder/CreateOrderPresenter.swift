@@ -11,21 +11,36 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 protocol CreateOrderPresentationLogic
 {
+    var viewModel: Driver<CreateOrderModel.DTO.ViewModel> { get }
     func presentOrder(response: CreateOrderModel.DTO.Response)
 }
 
 class CreateOrderPresenter: CreateOrderPresentationLogic
 {
+    var viewModel: Driver<CreateOrderModel.DTO.ViewModel> {
+        return (interactor?.createOrderResponse
+                    .map { response in
+                        return CreateOrderModel.DTO.ViewModel(formattedResult: response.result.uppercased())
+                    }.asDriver(onErrorJustReturn: CreateOrderModel.DTO.ViewModel(formattedResult: "Failed to create order!")))!
+    }
+    
+    var interactor: CreateOrderBusinessLogic?
     weak var viewController: CreateOrderDisplayLogic?
+    
+//    viewModel: Driver<CreateOrderModel.DTO.ViewModel> {
+//        return (interactor?.createOrderResponse
+//            .map { response in
+//                return CreateOrderModel.DTO.ViewModel(formattedResult: response.result.uppercased())
+//            }.asDriver(onErrorJustReturn: CreateOrderModel.DTO.ViewModel(formattedResult: "Failed to create order!")))!
+//    }
     
     // MARK: Do something
     
-    func presentOrder(response: CreateOrderModel.DTO.Response)
-    {
-        let viewModel = CreateOrderModel.DTO.ViewModel(formattedResult: response.result.uppercased())
-        viewController?.displayOrder(viewModel: viewModel)
+    func presentOrder(response: CreateOrderModel.DTO.Response) {
     }
 }
