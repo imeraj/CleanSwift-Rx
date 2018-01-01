@@ -12,18 +12,15 @@
 
 import UIKit
 
-@objc protocol CreateOrderRoutingLogic
-{
+@objc protocol CreateOrderRoutingLogic {
     func routeToDisplayOrder(segue: UIStoryboardSegue?)
 }
 
-protocol CreateOrderDataPassing
-{
+protocol CreateOrderDataPassing {
     var dataStore: CreateOrderDataStore? { get }
 }
 
-class CreateOrderRouter: NSObject, CreateOrderRoutingLogic, CreateOrderDataPassing
-{
+class CreateOrderRouter: NSObject, CreateOrderRoutingLogic, CreateOrderDataPassing {
     weak var viewController: CreateOrderViewController?
     var dataStore: CreateOrderDataStore?
     
@@ -36,7 +33,7 @@ class CreateOrderRouter: NSObject, CreateOrderRoutingLogic, CreateOrderDataPassi
         passDataToDisplayOrder(source: dataStore!, destination: &destinationDS)
       } else {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var destinationVC = storyboard.instantiateViewController(withIdentifier: "DisplayOrderViewController") as! DisplayOrderViewController
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "DisplayOrderViewController") as! DisplayOrderViewController
         var destinationDS = destinationVC.router!.dataStore!
         passDataToDisplayOrder(source: dataStore!, destination: &destinationDS)
         navigateToDisplayOrder(source: viewController!, destination: destinationVC)
@@ -45,15 +42,13 @@ class CreateOrderRouter: NSObject, CreateOrderRoutingLogic, CreateOrderDataPassi
     
     // MARK: Navigation
     
-    func navigateToDisplayOrder(source: CreateOrderViewController, destination: DisplayOrderViewController)
-    {
+    func navigateToDisplayOrder(source: CreateOrderViewController, destination: DisplayOrderViewController) {
       source.show(destination, sender: nil)
     }
     
     // MARK: Passing data
     
-    func passDataToDisplayOrder(source: CreateOrderDataStore, destination: inout DisplayOrderDataStore)
-    {
+    func passDataToDisplayOrder(source: CreateOrderDataStore, destination: inout DisplayOrderDataStore) {
       destination.name = source.name
     }
 }

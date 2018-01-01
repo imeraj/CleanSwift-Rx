@@ -12,36 +12,30 @@
 
 import UIKit
 
-protocol DisplayOrderDisplayLogic: class
-{
+protocol DisplayOrderDisplayLogic: class {
     func displaySomething(viewModel: DisplayOrderModel.DTO.ViewModel)
 }
 
-class DisplayOrderViewController: UIViewController, DisplayOrderDisplayLogic
-{
+class DisplayOrderViewController: UIViewController, DisplayOrderDisplayLogic {
     @IBOutlet weak var orderDisplayLabel: UILabel!
-
+    
     var interactor: DisplayOrderBusinessLogic?
     var router: (NSObjectProtocol & DisplayOrderRoutingLogic & DisplayOrderDataPassing)?
     
     // MARK: Object lifecycle
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-    {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
     // MARK: Setup
-    
-    private func setup()
-    {
+    private func setup() {
         let viewController = self
         let interactor = DisplayOrderInteractor()
         let presenter = DisplayOrderPresenter()
@@ -55,9 +49,7 @@ class DisplayOrderViewController: UIViewController, DisplayOrderDisplayLogic
     }
     
     // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scene = segue.identifier {
             let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
             if let router = router, router.responds(to: selector) {
@@ -67,30 +59,19 @@ class DisplayOrderViewController: UIViewController, DisplayOrderDisplayLogic
     }
     
     // MARK: View lifecycle
-    
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
-        
         orderDisplayLabel.text! = (router?.dataStore?.name)!
-        
         //doSomething()
     }
     
     // MARK: Do something
-    
-    func getOrder() {
-        
-    }
-    
-    func doSomething()
-    {
+    func doSomething() {
         let request = DisplayOrderModel.DTO.Request()
         interactor?.doSomething(request: request)
     }
     
-    func displaySomething(viewModel: DisplayOrderModel.DTO.ViewModel)
-    {
+    func displaySomething(viewModel: DisplayOrderModel.DTO.ViewModel) {
         //nameTextField.text = viewModel.name
     }
 }

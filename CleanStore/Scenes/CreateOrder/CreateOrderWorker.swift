@@ -12,9 +12,8 @@
 
 import UIKit
 
-class CreateOrderWorker
-{
-    var request : CreateOrderModel.DTO.Request?
+class CreateOrderWorker {
+    var request: CreateOrderModel.DTO.Request?
     
     init(request: CreateOrderModel.DTO.Request?) {
         self.request = request

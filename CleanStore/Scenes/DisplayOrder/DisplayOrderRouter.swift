@@ -12,18 +12,15 @@
 
 import UIKit
 
-@objc protocol DisplayOrderRoutingLogic
-{
+@objc protocol DisplayOrderRoutingLogic {
   //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
-protocol DisplayOrderDataPassing
-{
+protocol DisplayOrderDataPassing {
   var dataStore: DisplayOrderDataStore? { get }
 }
 
-class DisplayOrderRouter: NSObject, DisplayOrderRoutingLogic, DisplayOrderDataPassing
-{
+class DisplayOrderRouter: NSObject, DisplayOrderRoutingLogic, DisplayOrderDataPassing {
   weak var viewController: DisplayOrderViewController?
   var dataStore: DisplayOrderDataStore?
   

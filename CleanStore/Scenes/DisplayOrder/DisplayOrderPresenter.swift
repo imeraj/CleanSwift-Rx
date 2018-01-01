@@ -12,20 +12,17 @@
 
 import UIKit
 
-protocol DisplayOrderPresentationLogic
-{
-  func presentSomething(response: DisplayOrderModel.DTO.Response)
+protocol DisplayOrderPresentationLogic {
+    func presentSomething(response: DisplayOrderModel.DTO.Response)
 }
 
-class DisplayOrderPresenter: DisplayOrderPresentationLogic
-{
-  weak var viewController: DisplayOrderDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: DisplayOrderModel.DTO.Response)
-  {
-    let viewModel = DisplayOrderModel.DTO.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+class DisplayOrderPresenter: DisplayOrderPresentationLogic {
+    weak var viewController: DisplayOrderDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentSomething(response: DisplayOrderModel.DTO.Response) {
+        let viewModel = DisplayOrderModel.DTO.ViewModel()
+        viewController?.displaySomething(viewModel: viewModel)
+    }
 }

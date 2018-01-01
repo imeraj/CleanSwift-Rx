@@ -14,7 +14,6 @@ import UIKit
 
 class DisplayOrderWorker
 {
-  func doSomeWork()
-  {
+  func doSomeWork() {
   }
 }

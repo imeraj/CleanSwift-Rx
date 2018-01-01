@@ -14,13 +14,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol CreateOrderDisplayLogic: class
-{
+protocol CreateOrderDisplayLogic: class {
     func displayOrder(viewModel: CreateOrderModel.DTO.ViewModel)
 }
 
-class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic
-{
+class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic {
     let disposeBag =  DisposeBag()
     
     @IBOutlet weak var firstNameField: UITextField!
@@ -57,7 +55,7 @@ class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic
         
         interactor.presenter = presenter
         presenter.interactor = interactor
-      
+        
         router.viewController = viewController
         router.dataStore = interactor
     }
@@ -75,7 +73,7 @@ class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic
     
     // MARK: View lifecycle
     
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         configurePresenter()
         doneButton.rx.tap
@@ -83,9 +81,9 @@ class CreateOrderViewController: UITableViewController, CreateOrderDisplayLogic
                 self.createOrder()
             }.disposed(by: disposeBag)
     }
-   
+    
     // MARK: Do something
-
+    
     func createOrder() {
         let firstName =  firstNameField.text!
         let lastName = lastNameField.text!

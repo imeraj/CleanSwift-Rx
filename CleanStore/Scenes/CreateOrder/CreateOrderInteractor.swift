@@ -13,19 +13,16 @@
 import UIKit
 import RxSwift
 
-protocol CreateOrderBusinessLogic
-{
+protocol CreateOrderBusinessLogic {
     var createOrderResponse: PublishSubject<CreateOrderModel.DTO.Response> { get set }
     func createOrder(request: CreateOrderModel.DTO.Request)
 }
 
-protocol CreateOrderDataStore
-{
+protocol CreateOrderDataStore {
     var name: String { get set }
 }
 
-class CreateOrderInteractor: CreateOrderBusinessLogic, CreateOrderDataStore
-{
+class CreateOrderInteractor: CreateOrderBusinessLogic, CreateOrderDataStore {
     var name: String = ""
     var createOrderResponse = PublishSubject<CreateOrderModel.DTO.Response>()
     
@@ -33,7 +30,6 @@ class CreateOrderInteractor: CreateOrderBusinessLogic, CreateOrderDataStore
     var worker: CreateOrderWorker!
     
     // MARK: Do something
-    
     func createOrder(request: CreateOrderModel.DTO.Request) {
         worker = CreateOrderWorker(request: request)
         let order = worker.createOrder()

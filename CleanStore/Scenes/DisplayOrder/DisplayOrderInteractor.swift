@@ -12,18 +12,15 @@
 
 import UIKit
 
-protocol DisplayOrderBusinessLogic
-{
+protocol DisplayOrderBusinessLogic {
     func doSomething(request: DisplayOrderModel.DTO.Request)
 }
 
-protocol DisplayOrderDataStore
-{
+protocol DisplayOrderDataStore {
     var name: String { get set }
 }
 
-class DisplayOrderInteractor: DisplayOrderBusinessLogic, DisplayOrderDataStore
-{
+class DisplayOrderInteractor: DisplayOrderBusinessLogic, DisplayOrderDataStore {
     var name: String = ""
 
     var presenter: DisplayOrderPresentationLogic?
@@ -32,8 +29,7 @@ class DisplayOrderInteractor: DisplayOrderBusinessLogic, DisplayOrderDataStore
     
     // MARK: Do something
     
-    func doSomething(request: DisplayOrderModel.DTO.Request)
-    {
+    func doSomething(request: DisplayOrderModel.DTO.Request) {
         worker = DisplayOrderWorker()
         worker?.doSomeWork()
         

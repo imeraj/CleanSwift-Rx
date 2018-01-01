@@ -12,8 +12,7 @@
 
 import UIKit
 
-enum CreateOrderModel
-{
+enum CreateOrderModel {
     // MARK: Use cases    
     enum DTO {
         struct Request {

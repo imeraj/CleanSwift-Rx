@@ -3,6 +3,7 @@ use_frameworks!
 target 'CleanStore' do
 	pod 'RxSwift', '~> 4.0'
     pod 'RxCocoa', '~> 4.0'
+	pod 'SwiftLint', '0.23.1'
 end
 
 post_install do |installer|

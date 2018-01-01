@@ -12,20 +12,16 @@
 
 import UIKit
 
-enum DisplayOrderModel
-{
+enum DisplayOrderModel {
     // MARK: Use cases
     enum DTO {
         struct Request {
-            
         }
         
         struct Response {
-        
         }
         
         struct ViewModel {
-        
         }
     }
 }
